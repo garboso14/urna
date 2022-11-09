@@ -1,0 +1,84 @@
+Gereciadordetelas:
+    MenuScreen:
+        name:'menu'
+    Votacao:
+        name:'votacao'
+    Cadastro:
+        name:'cadastro'
+    Resultado:
+        name:'resultado'
+
+<MenuScreen>:
+    ScrollView:
+        MDFloatLayout:
+            radius: [0, 0, 0, 0]
+            md_bg_color: app.theme_cls.primary_dark
+            MDRaisedButton:
+                pos_hint:{"center_x": 0.5,"center_y": 0.6}
+                size_hint:(0.5,0.1)
+                text:"Votação"
+                on_release:
+                    app.root.current = 'votacao'
+            MDRaisedButton:
+                pos_hint:{"center_x": 0.5,"center_y": 0.4}
+                size_hint:(0.5,0.1)
+                text:"Cadastro"
+                on_release:
+                    app.root.current = 'cadastro'
+            MDRaisedButton:
+                pos_hint:{"center_x": 0.5,"center_y": 0.2}
+                size_hint:(0.5,0.1)
+                text:"Resultado"
+                on_release:
+                    app.root.current = 'resultado'
+            MDIconButton:
+                icon: "language-python"
+                pos_hint: {"center_x": .98, "center_y": 0.03}
+                on_release:
+                    app.root.switch_theme_style()
+<Votacao>:
+    ScrollView:
+        MDFloatLayout:
+            radius: [0, 0, 0, 0]
+            md_bg_color: app.theme_cls.primary_dark
+<Cadastro>:
+    ScrollView:
+        MDFloatLayout:
+            radius: [0, 0, 0, 0]
+            md_bg_color: app.theme_cls.primary_dark
+            MDFloatLayout:
+                MDTextField:
+                    id:nome
+                    radius:[20,0,0,20]
+                    pos_hint:{"center_x": 0.5,"center_y": 0.7}
+                    hint_text: "Nome Candidato"
+                    mode: "rectangle"
+                MDTextField:
+                    id:idade
+                    pos_hint:{"center_x": 0.5,"center_y": 0.6}
+                    hint_text: "Idade Candidato"
+                    mode: "rectangle"
+                MDTextField:
+                    id:descricao
+                    pos_hint:{"center_x": 0.5,"center_y": 0.5}
+                    hint_text: "Descrição"
+                    mode: "rectangle"
+                MDRaisedButton:
+                    id:cadastrar
+                    pos_hint:{"center_x": 0.5,"center_y": 0.2}
+                    size_hint:(0.5,0.1)
+                    text:"Resultado"
+                    multiline:  True
+                    on_release:
+                        root.cadastro()
+
+
+<Resultado>:
+    ScrollView:
+        MDFloatLayout:
+            radius: [0, 0, 0, 0]
+            md_bg_color: app.theme_cls.primary_dark
+
+
+
+
