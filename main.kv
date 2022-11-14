@@ -11,74 +11,113 @@ Gereciadordetelas:
 <MenuScreen>:
     ScrollView:
         MDFloatLayout:
-            radius: [0, 0, 0, 0]
-            md_bg_color: app.theme_cls.primary_dark
             MDRaisedButton:
                 pos_hint:{"center_x": 0.5,"center_y": 0.6}
                 size_hint:(0.5,0.1)
                 text:"Votação"
                 on_release:
                     app.root.current = 'votacao'
+                    root.manager.transition.direction = 'left'
             MDRaisedButton:
                 pos_hint:{"center_x": 0.5,"center_y": 0.4}
                 size_hint:(0.5,0.1)
                 text:"Cadastro"
                 on_release:
                     app.root.current = 'cadastro'
+                    root.manager.transition.direction = 'left'
             MDRaisedButton:
                 pos_hint:{"center_x": 0.5,"center_y": 0.2}
                 size_hint:(0.5,0.1)
                 text:"Resultado"
                 on_release:
                     app.root.current = 'resultado'
+                    root.manager.transition.direction = 'left'
             MDIconButton:
                 icon: "language-python"
                 pos_hint: {"center_x": .98, "center_y": 0.03}
                 on_release:
                     app.root.switch_theme_style()
 <Votacao>:
-    ScrollView:
-        MDFloatLayout:
-            radius: [0, 0, 0, 0]
-            md_bg_color: app.theme_cls.primary_dark
+    MDBoxLayout:
+        id:box
+        orientation: "vertical"
+        MDTopAppBar:
+            type:"top"
+            title: "Urna eletronica"
+            pos_hint: {"top": 1}
+            elevation: 4
+        MDIconButton:
+            icon: "arrow-left"
+            pos_hint:{"center_x": 0.03,"center_y": 0.95}
+            padding:[20,0,0,20]
+            on_press:
+                app.root.current = "menu"
+                root.manager.transition.direction = 'right'
+        MDLabel
+            id:label
+            text: ""
+            halign:"center"
+            size_hint:(0.5,0.1)
+            pos_hint:{"center_x": 0.5,"center_y": 0.7}
+
+        MDRaisedButton:
+            text:"iniciar"
+            pos_hint:{"center_x": 0.5,"center_y": 0.5}
+            on_press:root.fetchall()
+
 <Cadastro>:
     ScrollView:
         MDFloatLayout:
-            radius: [0, 0, 0, 0]
-            md_bg_color: app.theme_cls.primary_dark
-            MDFloatLayout:
-                MDTextField:
-                    id:nome
-                    radius:[20,0,0,20]
-                    pos_hint:{"center_x": 0.5,"center_y": 0.7}
-                    hint_text: "Nome Candidato"
-                    mode: "rectangle"
-                MDTextField:
-                    id:idade
-                    pos_hint:{"center_x": 0.5,"center_y": 0.6}
-                    hint_text: "Idade Candidato"
-                    mode: "rectangle"
-                MDTextField:
-                    id:descricao
-                    pos_hint:{"center_x": 0.5,"center_y": 0.5}
-                    hint_text: "Descrição"
-                    mode: "rectangle"
-                MDRaisedButton:
-                    id:cadastrar
-                    pos_hint:{"center_x": 0.5,"center_y": 0.2}
-                    size_hint:(0.5,0.1)
-                    text:"Resultado"
-                    multiline:  True
-                    on_release:
-                        root.cadastro()
+            MDBoxLayout:
+                orientation: "vertical"
+                MDTopAppBar:
+                    title: "Cadastro"
+                MDFloatLayout:
+                    MDIconButton:
+                        icon: "arrow-left"
+                        pos_hint:{"center_x": 0.03,"center_y": 0.95}
+                        on_press:
+                            app.root.current = "menu"
+                            root.manager.transition.direction = 'right'
+                    MDTextField:
+                        id:nome
+                        radius:[20,0,0,20]
+                        pos_hint:{"center_x": 0.5,"center_y": 0.7}
+                        hint_text: "Nome"
+                        size_hint_x:0.4
+                        mode: "rectangle"
+                    MDTextField:
+                        id:idade
+                        size_hint_x:0.4
+                        pos_hint:{"center_x": 0.5,"center_y": 0.6}
+                        hint_text: "Idade"
+                        mode: "rectangle"
+                    MDTextField:
+                        id:descricao
+                        size_hint_x:0.4
+                        pos_hint:{"center_x": 0.5,"center_y": 0.5}
+                        hint_text: "Descrição"
+                        mode: "rectangle"
+                    MDFillRoundFlatButton:
+                        id:cadastrar
+                        pos_hint:{"center_x": 0.5,"center_y": 0.2}
+                        size_hint:(0.5,0.1)
+                        text:"Cadastrar"
+                        multiline:  True
+                        on_release:
+                            root.submit()
 
 
 <Resultado>:
     ScrollView:
         MDFloatLayout:
             radius: [0, 0, 0, 0]
-            md_bg_color: app.theme_cls.primary_dark
-
+            MDIconButton:
+                icon: "arrow-left"
+                pos_hint:{"center_x": 0.03,"center_y": 0.95}
+                on_press:
+                    app.root.current = "menu"
+                    root.manager.transition.direction = 'right'
 
 
 
