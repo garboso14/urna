@@ -1,3 +1,4 @@
+#:import Snackbar kivymd.uix.snackbar.Snackbar
 Gereciadordetelas:
     MenuScreen:
         name:'menu'
@@ -36,88 +37,148 @@ Gereciadordetelas:
                 icon: "language-python"
                 pos_hint: {"center_x": .98, "center_y": 0.03}
                 on_release:
-                    app.root.switch_theme_style()
+                    root.switch_theme_style()
 <Votacao>:
-    MDBoxLayout:
-        id:box
-        orientation: "vertical"
-        MDTopAppBar:
-            type:"top"
-            title: "Urna eletronica"
-            pos_hint: {"top": 1}
-            elevation: 4
-        MDIconButton:
-            icon: "arrow-left"
-            pos_hint:{"center_x": 0.03,"center_y": 0.95}
-            padding:[20,0,0,20]
-            on_press:
-                app.root.current = "menu"
-                root.manager.transition.direction = 'right'
-        MDLabel
-            id:label
-            text: ""
-            halign:"center"
-            size_hint:(0.5,0.1)
-            pos_hint:{"center_x": 0.5,"center_y": 0.7}
+    MDFloatLayout:
+        MDGridLayout:
+            id:grid
+            cols:6
+            spacing:30
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
 
-        MDRaisedButton:
-            text:"iniciar"
-            pos_hint:{"center_x": 0.5,"center_y": 0.5}
-            on_press:root.fetchall()
+        MDFloatLayout:
+            MDFillRoundFlatButton:
+                text:"Votar"
+                pos_hint:{'center_x':.06,'center_y':.3}
+                on_press:
+                    Snackbar(text="Seu voto foi Computado").open()
+                    root.eleicao()
+            MDFillRoundFlatButton:
+                text:"Votar"
+                pos_hint:{'center_x':.23,'center_y':.3}
+                on_press:
+                    Snackbar(text="Seu voto foi Computado").open()
+                    root.eleicao1()
+            MDFillRoundFlatButton:
+                text:"Votar"
+                pos_hint:{'center_x':.39,'center_y':.3}
+                on_press:
+                    Snackbar(text="Seu voto foi Computado").open()
+                    root.eleicao2()
+            MDFillRoundFlatButton:
+                text:"Votar"
+                pos_hint:{'center_x':.55,'center_y':.3}
+                on_press:
+                    Snackbar(text="Seu voto foi Computado").open()
+                    root.eleicao3()
+            MDFillRoundFlatButton:
+                text:"Votar"
+                pos_hint:{'center_x':.71,'center_y':.3}
+                on_press:
+                    Snackbar(text="Seu voto foi Computado").open()
+                    root.eleicao4()
+            MDFillRoundFlatButton:
+                text:"Votar"
+                pos_hint:{'center_x':.86,'center_y':.3}
+                on_press:
+                    Snackbar(text="Seu voto foi Computado").open()
+                    root.eleicao5()
+            MDRaisedButton:
+                id:btn
+                text:"iniciar"
+                halign:"center"
+                pos_hint:{'center_x':.97,'center_y':.9}
+                on_press:
+                    root.fetchall()
+            MDBottomAppBar:
+                md_bg_color: 0, 0, 1, 1
+
+                MDTopAppBar:
+                    title: "votacao"
+                    icon: "arrow-left-circle"
+                    type: "bottom"
+                    icon_color: 0, 0, 1, 1
+                    mode:'end'
+                    on_action_button:
+                        app.root.current = "menu"
+                        root.manager.transition.direction = 'right'
 
 <Cadastro>:
     ScrollView:
-        MDFloatLayout:
-            MDBoxLayout:
-                orientation: "vertical"
+        BoxLayout:
+            spacing:10
+            orientation:'vertical'
+            MDTextField:
+                id:nome
+                size_hint_x:0.4
+                pos_hint:{"center_x": 0.5,"center_y": 0.}
+                hint_text: "nome"
+                mode: "rectangle"
+            MDTextField:
+                id:idade
+                size_hint_x:0.4
+                pos_hint:{"center_x": 0.5,"center_y": 0.8}
+                hint_text: "Idade"
+                mode: "rectangle"
+            MDTextField:
+                id:descricao
+                size_hint_x:0.4
+                pos_hint:{"center_x": 0.5,"center_y": 0.8}
+                hint_text: "descrição"
+                multiline:  True
+                mode: "rectangle"
+            MDFillRoundFlatButton:
+                id:cadastrar
+                pos_hint:{"center_x": 0.5,"center_y": 0.5}
+                text:"Cadastrar"
+                on_release:
+                    root.submit()
+
+            MDBottomAppBar:
+                md_bg_color: 0, 0, 1, 1
                 MDTopAppBar:
-                    title: "Cadastro"
-                MDFloatLayout:
-                    MDIconButton:
-                        icon: "arrow-left"
-                        pos_hint:{"center_x": 0.03,"center_y": 0.95}
-                        on_press:
-                            app.root.current = "menu"
-                            root.manager.transition.direction = 'right'
-                    MDTextField:
-                        id:nome
-                        radius:[20,0,0,20]
-                        pos_hint:{"center_x": 0.5,"center_y": 0.7}
-                        hint_text: "Nome"
-                        size_hint_x:0.4
-                        mode: "rectangle"
-                    MDTextField:
-                        id:idade
-                        size_hint_x:0.4
-                        pos_hint:{"center_x": 0.5,"center_y": 0.6}
-                        hint_text: "Idade"
-                        mode: "rectangle"
-                    MDTextField:
-                        id:descricao
-                        size_hint_x:0.4
-                        pos_hint:{"center_x": 0.5,"center_y": 0.5}
-                        hint_text: "Descrição"
-                        mode: "rectangle"
-                    MDFillRoundFlatButton:
-                        id:cadastrar
-                        pos_hint:{"center_x": 0.5,"center_y": 0.2}
-                        size_hint:(0.5,0.1)
-                        text:"Cadastrar"
-                        multiline:  True
-                        on_release:
-                            root.submit()
+                    title: "Cadastro de candidatos"
+                    icon: "arrow-left-circle"
+                    type: "bottom"
+                    icon_color: 0, 0, 1, 1
+                    mode:'end'
+                    on_action_button:
+                        app.root.current = "menu"
+                        root.manager.transition.direction = 'right'
+
+
+
+
 
 
 <Resultado>:
     ScrollView:
+
         MDFloatLayout:
-            radius: [0, 0, 0, 0]
-            MDIconButton:
-                icon: "arrow-left"
-                pos_hint:{"center_x": 0.03,"center_y": 0.95}
+            id:resultado
+            MDLabel:
+                id:nomer
+                text:""
+                halign:"center"
+
+            MDRaisedButton:
+                text:"resultado"
+                pos_hint:{"center_x":.2,"center_y":.5}
                 on_press:
-                    app.root.current = "menu"
-                    root.manager.transition.direction = 'right'
+                    root.resultados()
+            MDBottomAppBar:
+                md_bg_color: 0, 0, 1, 1
+                MDTopAppBar:
+                    title: "Resultados"
+                    icon: "arrow-left-circle"
+                    type: "bottom"
+                    icon_color: 0, 0, 1, 1
+                    mode:'end'
+                    on_action_button:
+                        app.root.current = "menu"
+                        root.manager.transition.direction = 'right'
 
 
 
