@@ -29,13 +29,7 @@ class MD3Card(MDCard):
 class Gereciadordetelas(ScreenManager):
     pass
 class MenuScreen(MDScreen):
-    def switch_theme_style(self):
-        self.theme_cls.primary_palette = (
-            "Orange" if self.theme_cls.primary_palette == "Red" else "Red"
-        )
-        self.theme_cls.theme_style = (
-            "Dark" if self.theme_cls.theme_style == "Light" else "Light"
-        )
+    pass
 class Cadastro(MDScreen):
     def submit(self):
         conexao = sqlite3.connect('urna.db')
@@ -72,7 +66,7 @@ class Votacao(MDScreen):
                         MD3Card(
                             MDRelativeLayout(
                                 FitImage(
-                                    source="img/pexels-fernanda-latronico-713520.jpg",
+                                    source="img/ícone-do-pic-perfil-isolado-no-fundo-branco-133862807.jpg",
                                     size_hint_y=0.35,
                                     pos_hint={"top": 1},
                                     radius=(36, 36, 0, 0),
@@ -158,21 +152,21 @@ class Resultado(MDScreen):
         nome = c.fetchall()
         c.execute("SELECT votos FROM eleicao")
         votos = c.fetchall()
+
         print(max(candidatosresultados))
         self.ids.resultado.add_widget(MD3Card(
                             MDRelativeLayout(
                                 FitImage(
-                                    source="img/pexels-fernanda-latronico-713520.jpg",
+                                    source="img/ícone-do-pic-perfil-isolado-no-fundo-branco-133862807.jpg",
                                     size_hint_y=0.35,
                                     pos_hint={"top": 1},
                                     radius=(36, 36, 0, 0),
                                 ),
                                 MDLabel(
-                                    text=str(max(candidatosresultados)),
+                                    text=f"{nome[0]}{str(max(votos))}votos",
                                     adaptive_size=True,
-
                                     color="black",
-                                    pos=("12dp", "12dp"),
+                                    pos=("20dp", "20dp"),
                                     ),
 
                                 ),
@@ -181,15 +175,15 @@ class Resultado(MDScreen):
                             size_hint=(None, None),
                             size=("200dp", "400dp"),
                         ))
-        x = [votos[0],votos[1],votos[2],votos[3]]
-        colors = plt.get_cmap('Blues')(np.linspace(0.2, 0.7, len(x)))
-       # for candidatos in range(len(nome)):
-       #     fig, ax = plt.subplots()
-       #     ax.pie(x, colors=colors, radius=3, center=(4, 4),
+        #x = [votos[0],votos[1],votos[2],votos[3]]
+        #colors = plt.get_cmap('Blues')(np.linspace(0.2, 0.7, len(x)))
+        # for candidatos in range(len(nome)):
+        #     fig, ax = plt.subplots()
+        #     ax.pie(x, colors=colors, radius=3, center=(4, 4),
         #           wedgeprops={"linewidth": 1, "edgecolor": "white"}, frame=True)
 
         #    ax.set(xlim=(0, 8), xticks=np.arange(1, 8),
-         #          ylim=(0, 8), yticks=np.arange(1, 8))
+        #          ylim=(0, 8), yticks=np.arange(1, 8))
 
         #    plt.show()
         #plt.pie(, labels=nome, autopct='%1.1f%%', shadow=True, startangle=140)
@@ -198,9 +192,19 @@ class Resultado(MDScreen):
 class MainApp(MDApp):
 
     def build(self):
-        self.theme_cls.theme_style="Dark"
+        self.theme_cls.theme_style_switch_animation = True
+        self.theme_cls.theme_style = "Dark"
+        self.theme_cls.primary_palette = "Orange"
         self.title="Urna Eletronica"
         return Builder.load_file('main.kv')
+
+    def switch_theme_style(self):
+        self.theme_cls.primary_palette = (
+            "Orange" if self.theme_cls.primary_palette == "Red" else "Red"
+        )
+        self.theme_cls.theme_style = (
+            "Dark" if self.theme_cls.theme_style == "Light" else "Light"
+        )
 
 
 if __name__ == '__main__':

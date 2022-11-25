@@ -12,6 +12,7 @@ Gereciadordetelas:
 <MenuScreen>:
     ScrollView:
         MDFloatLayout:
+            md_bg_color:
             FitImage:
                 source:"img/pexels-element-digital-1550337.jpg"
                 pos_hint:{"center_x":.5,"center_y":.9}
@@ -38,12 +39,13 @@ Gereciadordetelas:
                     app.root.current = 'resultado'
                     root.manager.transition.direction = 'left'
             MDIconButton:
-                icon: "language-python"
+                icon: "brightness-4"
                 pos_hint: {"center_x": .98, "center_y": 0.03}
                 on_release:
-                    root.switch_theme_style()
+                    app.switch_theme_style()
 <Votacao>:
     MDFloatLayout:
+        md_bg_color: 0,0,0,0
         MDGridLayout:
             id:grid
             cols:6
@@ -53,6 +55,7 @@ Gereciadordetelas:
         do_scroll_y: True
 
         MDFloatLayout:
+            md_bg_color: 0,0,0,0
             MDFillRoundFlatButton:
                 text:"Votar"
                 pos_hint:{'center_x':.06,'center_y':.3}
@@ -96,6 +99,11 @@ Gereciadordetelas:
                 pos_hint:{'center_x':.97,'center_y':.9}
                 on_press:
                     root.fetchall()
+            MDIconButton:
+                icon: "brightness-4"
+                pos_hint: {"center_x": .98, "center_y": 0.13}
+                on_release:
+                    app.switch_theme_style()
             MDBottomAppBar:
                 md_bg_color: 0, 0, 1, 1
 
@@ -112,7 +120,8 @@ Gereciadordetelas:
 <Cadastro>:
     ScrollView:
         BoxLayout:
-            spacing:10
+            md_bg_color: 0,0,0,0
+            spacing:30
             orientation:'vertical'
             MDTextField:
                 id:nome
@@ -136,10 +145,16 @@ Gereciadordetelas:
             MDFillRoundFlatButton:
                 id:cadastrar
                 pos_hint:{"center_x": 0.5,"center_y": 0.5}
+                size_hint_x:0.3
                 text:"Cadastrar"
+
                 on_release:
                     root.submit()
-
+            MDIconButton:
+                icon: "brightness-4"
+                pos_hint: {"center_x": .98, "center_y": 0.13}
+                on_release:
+                    app.switch_theme_style()
             MDBottomAppBar:
                 md_bg_color: 0, 0, 1, 1
                 MDTopAppBar:
@@ -161,6 +176,7 @@ Gereciadordetelas:
     ScrollView:
 
         MDFloatLayout:
+            md_bg_color: 0,0,0,0
             id:resultado
             MDLabel:
                 id:nomer
@@ -169,9 +185,15 @@ Gereciadordetelas:
 
             MDRaisedButton:
                 text:"resultado"
-                pos_hint:{"center_x":.2,"center_y":.5}
+                pos_hint:{"center_x":.5,"center_y":.5}
+
                 on_press:
                     root.resultados()
+            MDIconButton:
+                icon: "brightness-4"
+                pos_hint: {"center_x": .98, "center_y": 0.13}
+                on_release:
+                    app.switch_theme_style()
             MDBottomAppBar:
                 md_bg_color: 0, 0, 1, 1
                 MDTopAppBar:
