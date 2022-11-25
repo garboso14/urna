@@ -10,11 +10,14 @@ from kivymd.uix.gridlayout import MDGridLayout
 from kivymd.uix.label import MDLabel
 from kivymd.uix.relativelayout import MDRelativeLayout
 from kivymd.uix.screen import MDScreen
+from kivy_deps import sdl2, glew
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty,StringProperty
 import matplotlib.pyplot as plt
 import numpy as np
 import sqlite3
+import os, sys
+from kivy.resources import resource_add_path, resource_find
 
 conexao = sqlite3.connect('urna.db')
 cursor = conexao.cursor()
@@ -180,15 +183,15 @@ class Resultado(MDScreen):
                         ))
         x = [votos[0],votos[1],votos[2],votos[3]]
         colors = plt.get_cmap('Blues')(np.linspace(0.2, 0.7, len(x)))
-        for candidatos in range(len(nome)):
-            fig, ax = plt.subplots()
-            ax.pie(x, colors=colors, radius=3, center=(4, 4),
-                   wedgeprops={"linewidth": 1, "edgecolor": "white"}, frame=True)
+       # for candidatos in range(len(nome)):
+       #     fig, ax = plt.subplots()
+       #     ax.pie(x, colors=colors, radius=3, center=(4, 4),
+        #           wedgeprops={"linewidth": 1, "edgecolor": "white"}, frame=True)
 
-            ax.set(xlim=(0, 8), xticks=np.arange(1, 8),
-                   ylim=(0, 8), yticks=np.arange(1, 8))
+        #    ax.set(xlim=(0, 8), xticks=np.arange(1, 8),
+         #          ylim=(0, 8), yticks=np.arange(1, 8))
 
-            plt.show()
+        #    plt.show()
         #plt.pie(, labels=nome, autopct='%1.1f%%', shadow=True, startangle=140)
         #plt.axis('equal')
         #plt.show()
@@ -200,7 +203,9 @@ class MainApp(MDApp):
         return Builder.load_file('main.kv')
 
 
+if __name__ == '__main__':
+    if hasattr(sys, '_MEIPASS'):
+        resource_add_path(os.path.join(sys._MEIPASS))
+    MainApp().run().run()
 
 
-
-MainApp().run()
